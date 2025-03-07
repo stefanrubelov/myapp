@@ -1,0 +1,3 @@
+<div>
+    Payment reports
+</div>

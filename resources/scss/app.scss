@@ -1,0 +1,61 @@
+@use "flowbite/src/themes/default";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+
+:root {
+    color-scheme: light !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+body {
+    font-family: monospace, monospace !important;
+}
+
+button {
+    cursor: pointer !important;
+}
+
+table {
+    tbody {
+        tr:last-child {
+            td:first-child {
+                @apply rounded-bl-lg;
+            }
+
+            td:last-child {
+                @apply rounded-br-lg;
+            }
+        }
+    }
+
+    thead {
+        tr {
+            th:first-child {
+                @apply rounded-tl-lg;
+            }
+
+            th:last-child {
+                @apply rounded-tr-lg;
+            }
+        }
+    }
+
+}
