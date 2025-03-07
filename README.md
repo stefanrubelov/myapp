@@ -1,3 +1,17 @@
+## MyApp
+- after the initial planning and preparation of the first module, the next step is to refactor the code to follow the Domain Driven Design approach
+
+
+## Packages used <sub>*(so far)* </sub>
+- **blade-ui-kit/blade-heroicons**
+- **filament/forms**
+- **filament/infolists**
+- **codewithdennis/filament-select-tree**
+- **icehouse-ventures/laravel-chartjs**
+- **spatie/laravel-permission**
+- **spatie/laravel-sluggable**
+- **wire-elements/modal**
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
