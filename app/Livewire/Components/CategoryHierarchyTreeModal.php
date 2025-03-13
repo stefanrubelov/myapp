@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components;
 
-use App\Models\Category;
 use LivewireUI\Modal\ModalComponent;
 
 class CategoryHierarchyTreeModal extends ModalComponent
 {
     public $categories;
+
     public $currentCategory;
 
     public function mount($categories, $currentCategory)
@@ -18,7 +20,7 @@ class CategoryHierarchyTreeModal extends ModalComponent
 
     public function renderTreeItem($categories = [], $hasParent = false)
     {
-        if($categories == []){
+        if ($categories == []) {
             $categories = $this->categories;
         }
         $html = '';
@@ -29,9 +31,10 @@ class CategoryHierarchyTreeModal extends ModalComponent
                 'category' => $category,
                 'hasParent' => $hasParent,
                 'isLast' => $isLast,
-                'currentCategory' => $this->currentCategory
+                'currentCategory' => $this->currentCategory,
             ])->render();
         }
+
         return $html;
     }
 
@@ -40,7 +43,7 @@ class CategoryHierarchyTreeModal extends ModalComponent
         $categories = $this->categories;
 
         return view('livewire.components.category-hierarchy-tree-modal', [
-            'renderTreeItem' => $this->renderTreeItem($categories, false)
+            'renderTreeItem' => $this->renderTreeItem($categories, false),
         ]);
     }
 }

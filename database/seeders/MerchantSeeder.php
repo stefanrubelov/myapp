@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Enums\CategoryEnum;
-use App\Models\Category;
-use App\Models\Merchant;
+use App\Domains\Expenses\Category\Enums\CategoryEnum;
+use App\Domains\Expenses\Category\Models\Category;
+use App\Domains\Expenses\Merchant\Models\Merchant;
 use Illuminate\Database\Seeder;
 
 class MerchantSeeder extends Seeder

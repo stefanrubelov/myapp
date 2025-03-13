@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components;
 
 use Illuminate\Contracts\View\View;
@@ -68,7 +70,7 @@ class Breadcrumbs extends Component
         'merchants' => [
             'title' => 'Merchants',
             'expenses' => 'Expenses',
-        ]
+        ],
     ];
 
     public function mount(): void
@@ -80,7 +82,7 @@ class Breadcrumbs extends Component
     {
         $currentRouteName = $this->currentRoute != '' ? $this->currentRoute : Route::currentRouteName();
 
-        if (!isset(self::BREADCRUMB_HIERARCHY[$currentRouteName])) {
+        if (! isset(self::BREADCRUMB_HIERARCHY[$currentRouteName])) {
             return [];
         }
 
@@ -104,7 +106,7 @@ class Breadcrumbs extends Component
         $breadcrumbs[] = [
             'name' => $currentRouteName,
             'title' => $currentBreadcrumb['title'],
-//            'url' => route($currentRouteName),
+            //            'url' => route($currentRouteName),
         ];
 
         return $breadcrumbs;

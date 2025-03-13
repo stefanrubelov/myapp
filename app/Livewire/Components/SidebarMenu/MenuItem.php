@@ -1,15 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components\SidebarMenu;
 
 class MenuItem
 {
     private string $title;
+
     private ?string $route = null;
+
     private ?string $url = null;
+
     private ?string $icon = null;
+
     private array $permissions = [];
+
     private string $id;
+
     private string $type = 'item';
 
     public function __construct(string $title)

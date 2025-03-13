@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components\SidebarMenu;
 
 class MainSidebarMenu extends SidebarMenuComponent
 {
     public function initializeMenu(): void
     {
-        $listOfSidebarMenus = [
-            ExpensesSidebarMenu::menuItems(),
+        $this->menuItems = [
+            MenuItem::make('Expenses')
+                ->route('expenses')
+                ->icon('heroicon-o-squares-plus')
+                ->toArray(),
         ];
-        
-        $this->menuItems = call_user_func_array("array_merge", $listOfSidebarMenus);
     }
 }

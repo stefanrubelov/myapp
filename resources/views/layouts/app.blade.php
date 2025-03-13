@@ -33,7 +33,9 @@
     <body x-cloak class="antialiased bg-gray-100 dark:bg-slate-700">
     <div class="h-full">
         @livewire('components.header')
-
+        @if(in_array(Route::currentRouteName(), ['home', 'profile']))
+            @livewire('components.sidebar-menu.main-sidebar-menu')
+        @endif
         @hasSection('body')
             @yield('body')
         @else

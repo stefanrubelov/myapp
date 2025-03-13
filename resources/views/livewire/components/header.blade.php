@@ -157,16 +157,14 @@
                                 </div>
 
                                 <div class="p-2">
-                                    <form method="POST" action="#">
-                                        <button
-                                            type="submit"
+                                        <a
+                                            href="{{ route('logout') }}"
                                             class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-500 dark:text-white hover:bg-slate-100 dark:hover:text-slate-900 cursor-pointer"
                                             role="menuitem"
                                         >
                                             <x-heroicon-c-arrow-uturn-left class="size-4"/>
                                             Logout
-                                        </button>
-                                    </form>
+                                        </a>
                                 </div>
                             </div>
                         </div>

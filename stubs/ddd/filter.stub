@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domains\{{ namespace }}\Filters;
+
+use App\Domains\Shared\Filters\FilterInterface;
+use Illuminate\Database\Eloquent\Builder;
+
+class {{ entity }} implements FilterInterface
+{
+    private array $filters;
+
+    public function __construct(array $filters = [])
+    {
+        $this->filters = $filters;
+    }
+
+    public function apply(Builder $query): void
+    {
+        // filter your query here
+    }
+}

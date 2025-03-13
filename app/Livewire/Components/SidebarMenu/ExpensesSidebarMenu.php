@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components\SidebarMenu;
 
 class ExpensesSidebarMenu extends SidebarMenuComponent
@@ -12,9 +14,14 @@ class ExpensesSidebarMenu extends SidebarMenuComponent
     public static function menuItems(): array
     {
         return [
+            MenuItem::make('Home')
+                ->route('home')
+                ->icon('heroicon-o-home')
+                ->toArray(),
+
             MenuItem::make('General')
                 ->route('expenses')
-                ->icon('heroicon-o-home')
+                ->icon('heroicon-o-squares-plus')
                 ->toArray(),
 
             MenuGroup::make('Payments')

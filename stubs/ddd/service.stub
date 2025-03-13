@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domains\{{ namespace }}\Services;
+
+use App\Domains\{{ namespace }}\Repositories\{{ repository }};
+
+class {{ entity }}Service
+{
+    private {{ repository }} $repository;
+
+    public function __construct({{ repository }} $repository)
+    {
+        $this->repository = $repository;
+    }
+}

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Models\TransactionType;
+use App\Domains\Expenses\TransactionType\Models\TransactionType;
 use Illuminate\Database\Seeder;
 
 class TransactionTypeSeeder extends Seeder

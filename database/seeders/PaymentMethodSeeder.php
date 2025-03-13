@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Enums\PaymentMethodEnum;
-use App\Models\PaymentMethod;
+use App\Domains\Expenses\PaymentMethod\Enums\PaymentMethodEnum;
+use App\Domains\Expenses\PaymentMethod\Models\PaymentMethod;
 use Illuminate\Database\Seeder;
 
 class PaymentMethodSeeder extends Seeder

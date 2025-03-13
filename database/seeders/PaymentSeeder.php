@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Helpers\PaymentNumberGenerator;
-use App\Models\Payment;
-use Illuminate\Database\Eloquent\Factories\Sequence;
+use App\Domains\Expenses\Payment\Helpers\PaymentNumberGenerator;
+use App\Domains\Expenses\Payment\Model\Payment;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -16,7 +17,7 @@ class PaymentSeeder extends Seeder
     {
         collect(range(1, 100))->each(function () {
             Payment::factory()->create([
-                'payment_number' => PaymentNumberGenerator::generate()
+                'payment_number' => PaymentNumberGenerator::generate(),
             ]);
         });
     }

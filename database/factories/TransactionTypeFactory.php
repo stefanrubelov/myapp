@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
-use App\Enums\TransactionTypeEnum;
-use App\Models\TransactionType;
+use App\Domains\Expenses\TransactionType\Enums\TransactionTypeEnum;
+use App\Domains\Expenses\TransactionType\Models\TransactionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

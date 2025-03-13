@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\CategoryType;
+use App\Domains\Expenses\Category\Models\Category;
+use App\Domains\Expenses\CategoryType\Models\CategoryType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,9 +33,6 @@ class CategoryFactory extends Factory
 
     /**
      * Indicate that the category is a subcategory.
-     *
-     * @param $parentId
-     * @return Factory
      */
     public function withParent($parentId): Factory
     {

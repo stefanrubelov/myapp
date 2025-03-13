@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domains\{{ namespace }}\Repositories;
+
+use App\Domains\{{ namespace }}\Filters\{{ entity }}Filter;
+use App\Domains\{{ namespace }}\Models\{{ entity }};
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+class {{ entity }}Repository
+{
+    public function all({{ entity }}Filter $filter, int $perPage): LengthAwarePaginator
+    {
+        $query = {{ entity }}::query();
+
+        $filter->apply($query);
+
+        return $query->paginate($perPage);
+    }
+}

@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
+use App\Domains\Expenses\Payment\Repositories\PaymentRepository;
+use App\Domains\Expenses\Payment\Services\PaymentService;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentColor;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,14 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
+
+        $this->app->singleton(PaymentRepository::class, function () {
+            return new PaymentRepository;
+        });
+
+        $this->app->singleton(PaymentService::class, function ($app) {
+            return new PaymentService($app->make(PaymentRepository::class));
+        });
     }
 
     /**
@@ -28,7 +40,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
         });
-
         FilamentColor::register([
             'danger' => Color::Red,
             'gray' => Color::Zinc,

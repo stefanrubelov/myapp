@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Enums\CategoryEnum;
-use App\Enums\CategoryTypeEnum;
-use App\Models\Category;
-use App\Models\CategoryType;
+use App\Domains\Expenses\Category\Enums\CategoryEnum;
+use App\Domains\Expenses\Category\Models\Category;
+use App\Domains\Expenses\CategoryType\Enums\CategoryTypeEnum;
+use App\Domains\Expenses\CategoryType\Models\CategoryType;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -148,7 +150,6 @@ class CategorySeeder extends Seeder
             'name' => CategoryEnum::PHONE->value,
             'category_type_id' => $merchantType->id,
         ])->parent()->associate($billsParent)->save();
-
 
         Category::factory()->create([
             'name' => CategoryEnum::CAFE->value,

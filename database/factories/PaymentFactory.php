@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
-use App\Helpers\PaymentNumberGenerator;
-use App\Models\Merchant;
-use App\Models\Payment;
-use App\Models\PaymentMethod;
-use App\Models\Product;
-use App\Models\TransactionType;
-use App\Models\User;
+use App\Domains\Expenses\Merchant\Models\Merchant;
+use App\Domains\Expenses\Payment\Helpers\PaymentNumberGenerator;
+use App\Domains\Expenses\Payment\Model\Payment;
+use App\Domains\Expenses\PaymentMethod\Models\PaymentMethod;
+use App\Domains\Expenses\Product\Models\Product;
+use App\Domains\Expenses\TransactionType\Models\TransactionType;
+use App\Domains\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -37,7 +39,7 @@ class PaymentFactory extends Factory
             'payment_method_id' => $paymentMethod->id,
             'note' => $this->faker->realText(),
             'user_id' => $user->id,
-            'discounted'=> $this->faker->boolean(),
+            'discounted' => $this->faker->boolean(),
             'payment_date' => $this->faker->date(),
             'payment_number' => PaymentNumberGenerator::generate(),
         ];

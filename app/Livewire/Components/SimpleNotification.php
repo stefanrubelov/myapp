@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components;
 
 use Illuminate\Contracts\View\View;
@@ -10,8 +12,11 @@ class SimpleNotification extends Component
     public array $notifications = [];
 
     public const int TYPE_SUCCESS = 0;
+
     public const int TYPE_ALERT = 1;
+
     public const int TYPE_INFO = 2;
+
     public const int DEFAULT_TIMEOUT = 3000;
 
     protected $listeners = [
@@ -23,13 +28,6 @@ class SimpleNotification extends Component
         return view('livewire.components.simple-notification');
     }
 
-    /**
-     * @param string $title
-     * @param string $message
-     * @param int $type
-     * @param int $timeout
-     * @return void
-     */
     public function sendNotification(string $title = '', string $message = '', int $type = 0, int $timeout = self::DEFAULT_TIMEOUT): void
     {
         $notification = [

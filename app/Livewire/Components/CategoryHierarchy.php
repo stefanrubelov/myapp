@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Components;
 
-use App\Models\Category;
+use App\Domains\Expenses\Category\Models\Category;
 use Livewire\Component;
 
 class CategoryHierarchy extends Component

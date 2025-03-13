@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Enums\CategoryEnum;
-use App\Models\Category;
-use App\Models\Product;
+use App\Domains\Expenses\Category\Enums\CategoryEnum;
+use App\Domains\Expenses\Category\Models\Category;
+use App\Domains\Expenses\Product\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -18,7 +20,7 @@ class ProductSeeder extends Seeder
         // Get categories by slug
         $fruitsCategory = Category::where('slug', CategoryEnum::FRUITS->value)->first();
         $vegetablesCategory = Category::where('slug', CategoryEnum::VEGETABLES->value)->first();
-        $wholeGrainsCategory = Category::where('slug', Str::replace(" ", "-", CategoryEnum::WHOLE_GRAINS->value))->first();
+        $wholeGrainsCategory = Category::where('slug', Str::replace(' ', '-', CategoryEnum::WHOLE_GRAINS->value))->first();
         $legumesCategory = Category::where('slug', CategoryEnum::LEGUMES->value)->first();
         $nutsAndSeedsCategory = Category::where('slug', CategoryEnum::NUTS->value)->first();
         $seeds = Category::where('slug', CategoryEnum::SEEDS->value)->first();
