@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\User\Models;
 
+use App\Domains\User\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,6 +34,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
+    }
 
     /**
      * Get the attributes that should be cast.

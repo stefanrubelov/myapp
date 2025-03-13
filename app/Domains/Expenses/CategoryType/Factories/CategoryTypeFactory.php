@@ -24,4 +24,9 @@ class CategoryTypeFactory extends Factory
             'name' => $this->faker->randomElement(CategoryTypeEnum::values()),
         ];
     }
+
+    public function modelName(): string
+    {
+        return CategoryType::class;
+    }
 }

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\DDD;
 
+use App\Console\Commands\DDD\Generators\FactoryGenerator;
+use App\Console\Commands\DDD\Generators\FilterGenerator;
+use App\Console\Commands\DDD\Generators\ModelGenerator;
+use App\Console\Commands\DDD\Generators\RepositoryGenerator;
+use App\Console\Commands\DDD\Generators\ServiceGenerator;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
@@ -18,7 +23,7 @@ class CreateEntity extends Command
      *
      * @var string
      */
-    protected $signature = 'ddd:make:entity';
+    protected $signature = 'ddd:make:entity {name : The name or the path of the entity}';
 
     protected $description = 'Create a new entity in the Domains directory with its structure';
 
@@ -36,33 +41,38 @@ class CreateEntity extends Command
             'Helpers',
             'Forms',
             'Infolists',
+            'Factories',
         ];
 
-        $name = text(
+        $name = Str::ucfirst($this->argument('name') ?? text(
             label: 'Enter the entity name (e.g., Foo/Bar)',
-            required: true,
-            transform: fn (string $value) => Str::ucfirst($value)
-        );
+            required: true
+        ));
 
-        $basePath = domain_path('/'.$name);
+        $basePath = domain_path();
+        $entityPath = $name;
 
         $filesystem = new Filesystem;
+        $fullPath = "$basePath/$entityPath";
 
         foreach ($directories as $dir) {
-            $filesystem->ensureDirectoryExists("$basePath/$dir");
+            $filesystem->ensureDirectoryExists("$fullPath/$dir");
         }
 
-        $this->createModelFile($basePath, $name, $filesystem);
+        $this->createRouteFiles($fullPath, $filesystem);
 
-        $this->createFilterFile($basePath, $name, $filesystem);
+        $parts = explode('/', $entityPath);
+        $entityName = end($parts);
 
-        $this->createRepositoryFile($basePath, $name, $filesystem);
+        $generatorEntityPath = "$entityPath/Models/$entityName";
 
-        $this->createRouteFiles($basePath, $filesystem);
+        new FactoryGenerator($basePath, $generatorEntityPath)->generate();
+        new FilterGenerator($basePath, $generatorEntityPath)->generate();
+        new ModelGenerator($basePath, $generatorEntityPath)->generate();
+        new RepositoryGenerator($basePath, $generatorEntityPath)->generate();
+        new ServiceGenerator($basePath, $generatorEntityPath)->generate();
 
-        $this->createServiceFile($basePath, $name, $filesystem);
-
-        $this->info("Entity structure created at Domains/$name");
+        $this->info("Entity structure created at Domains/$entityPath");
     }
 
     private function createRouteFiles($basePath, Filesystem $filesystem): void
@@ -76,120 +86,6 @@ class CreateEntity extends Command
 
         if (! $filesystem->exists($apiRoutePath)) {
             $filesystem->put($apiRoutePath, "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\n// API routes for this entity\n");
-        }
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    private function createModelFile(string $basePath, string $entityName, Filesystem $filesystem): void
-    {
-        $modelPath = "$basePath/Models/".class_basename($entityName).'.php';
-
-        if (! $filesystem->exists($modelPath)) {
-            $stubPath = stub_path('ddd/model.stub');
-
-            if (! $filesystem->exists($stubPath)) {
-                $this->error('Stub file not found: stubs/model.stub');
-
-                return;
-            }
-
-            $stub = $filesystem->get($stubPath);
-            $namespace = str_replace('/', '\\', $entityName);
-            $entityClass = class_basename($entityName);
-
-            $stub = str_replace(['{{ namespace }}', '{{ entity }}'], [$namespace, $entityClass], $stub);
-
-            $filesystem->put($modelPath, $stub);
-        }
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    private function createRepositoryFile(string $basePath, string $entityName, Filesystem $filesystem): void
-    {
-        $repositoryPath = "$basePath/Repositories/".class_basename($entityName).'Repository.php';
-
-        if (! $filesystem->exists($repositoryPath)) {
-            $stubPath = stub_path('ddd/repository.stub');
-
-            if (! $filesystem->exists($stubPath)) {
-                $this->error('Stub file not found: stubs/repository.stub');
-
-                return;
-            }
-
-            $stub = $filesystem->get($stubPath);
-            $namespace = str_replace('/', '\\', $entityName);
-            $entityClass = class_basename($entityName);
-
-            $stub = str_replace(['{{ namespace }}', '{{ entity }}'], [$namespace, $entityClass], $stub);
-
-            $filesystem->put($repositoryPath, $stub);
-        }
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    private function createFilterFile(string $basePath, string $entityName, Filesystem $filesystem): void
-    {
-        $filterName = class_basename($entityName).'Filter';
-        $filterPath = "$basePath/Filters/$filterName.php";
-
-        if (! $filesystem->exists($filterPath)) {
-            $stubPath = stub_path('ddd/filter.stub');
-
-            if (! $filesystem->exists($stubPath)) {
-                $this->error('Stub file not found: stubs/filter.stub');
-
-                return;
-            }
-
-            $stub = $filesystem->get($stubPath);
-            $namespace = str_replace('/', '\\', $entityName);
-
-            $stub = str_replace(
-                ['{{ namespace }}', '{{ entity }}'],
-                [$namespace, $filterName],
-                $stub
-            );
-
-            $filesystem->put($filterPath, $stub);
-        }
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    private function createServiceFile(string $basePath, string $entityName, Filesystem $filesystem): void
-    {
-        $serviceName = class_basename($entityName).'Service';
-        $servicePath = "$basePath/Services/$serviceName.php";
-
-        if (! $filesystem->exists($servicePath)) {
-            $stubPath = stub_path('ddd/service.stub');
-
-            if (! $filesystem->exists($stubPath)) {
-                $this->error('Stub file not found: stubs/service.stub');
-
-                return;
-            }
-
-            $stub = $filesystem->get($stubPath);
-            $namespace = str_replace('/', '\\', $entityName);
-            $entityClass = class_basename($entityName);
-            $repositoryClass = $entityClass.'Repository';
-
-            $stub = str_replace(
-                ['{{ namespace }}', '{{ entity }}', '{{ repository }}'],
-                [$namespace, $entityClass, $repositoryClass],
-                $stub
-            );
-
-            $filesystem->put($servicePath, $stub);
         }
     }
 }

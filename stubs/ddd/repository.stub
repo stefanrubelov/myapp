@@ -6,16 +6,21 @@ namespace App\Domains\{{ namespace }}\Repositories;
 
 use App\Domains\{{ namespace }}\Filters\{{ entity }}Filter;
 use App\Domains\{{ namespace }}\Models\{{ entity }};
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class {{ entity }}Repository
 {
-    public function all({{ entity }}Filter $filter, int $perPage): LengthAwarePaginator
+    public function all({{ entity }}Filter $filter, int|bool $perPage): LengthAwarePaginator|Collection
     {
         $query = {{ entity }}::query();
 
         $filter->apply($query);
 
-        return $query->paginate($perPage);
+        if ($perPage) {
+            return $query->paginate($perPage);
+        }
+
+        return $query->get();
     }
 }

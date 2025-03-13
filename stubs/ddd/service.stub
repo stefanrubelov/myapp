@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domains\{{ namespace }}\Services;
 
+use App\Domains\{{ namespace }}\Filters\{{ entity }}Filter;
 use App\Domains\{{ namespace }}\Repositories\{{ repository }};
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class {{ entity }}Service
 {
@@ -13,5 +16,12 @@ class {{ entity }}Service
     public function __construct({{ repository }} $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function getAll(array $filters, int|false $perPage = 10): LengthAwarePaginator|Collection
+    {
+        $filter = new {{ entity }}Filter($filters);
+
+        return $this->repository->all($filter, $perPage);
     }
 }

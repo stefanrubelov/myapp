@@ -15,7 +15,7 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        collect(range(1, 100))->each(function () {
+        collect(range(1, 1000))->each(function () {
             Payment::factory()->create([
                 'payment_number' => PaymentNumberGenerator::generate(),
             ]);

@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domains\{{ namespace }}\Factories;
+
+use App\Domains\{{ namespace }}\Models\{{ entity }};
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<{{ entity }}>
+ */
+class {{ entity }}Factory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public function modelName(): string
+    {
+        return {{ entity }}::class;
+    }
+}

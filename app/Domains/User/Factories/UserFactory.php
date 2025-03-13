@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\User\Factories;
 
+use App\Domains\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -42,5 +43,10 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function modelName(): string
+    {
+        return User::class;
     }
 }

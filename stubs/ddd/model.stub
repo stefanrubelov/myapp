@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\{{ namespace }}\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Domains\{{ namespace }}\Factories\{{ entity }}Factory;
 use Illuminate\Database\Eloquent\Model;
 
 class {{ entity }} extends Model
@@ -12,4 +13,9 @@ class {{ entity }} extends Model
     use HasFactory;
 
     protected $fillable = [];
+
+    public static function newFactory(): {{ entity }}Factory
+    {
+        return {{ entity }}Factory::new();
+    }
 }

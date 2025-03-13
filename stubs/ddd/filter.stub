@@ -7,7 +7,7 @@ namespace App\Domains\{{ namespace }}\Filters;
 use App\Domains\Shared\Filters\FilterInterface;
 use Illuminate\Database\Eloquent\Builder;
 
-class {{ entity }} implements FilterInterface
+class {{ entity }}Filter implements FilterInterface
 {
     private array $filters;
 
