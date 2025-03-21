@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\TransactionType\Factories;
 
 use App\Domains\Expenses\TransactionType\Enums\TransactionTypeEnum;
 use App\Domains\Expenses\TransactionType\Models\TransactionType;
@@ -24,5 +24,10 @@ class TransactionTypeFactory extends Factory
             'name' => $this->faker->randomElement(TransactionTypeEnum::values()),
             'is_enabled' => $this->faker->boolean(),
         ];
+    }
+
+    public function modelName(): string
+    {
+        return TransactionType::class;
     }
 }

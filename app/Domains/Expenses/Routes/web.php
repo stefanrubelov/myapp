@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Livewire\Domains\Expenses\Homepage\ExpensesHomepage;
+use Illuminate\Support\Facades\Route;
+
+Route::get('', ExpensesHomepage::class)->name('expenses');
+
 Route::prefix('payments')
     ->group(domain_path('Expenses/Payment/Routes/web.php'));
 

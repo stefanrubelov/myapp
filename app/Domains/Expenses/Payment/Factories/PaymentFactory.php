@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\Payment\Factories;
 
 use App\Domains\Expenses\Merchant\Models\Merchant;
 use App\Domains\Expenses\Payment\Helpers\PaymentNumberGenerator;
@@ -41,7 +41,12 @@ class PaymentFactory extends Factory
             'user_id' => $user->id,
             'discounted' => $this->faker->boolean(),
             'payment_date' => $this->faker->date(),
-            'payment_number' => PaymentNumberGenerator::generate(),
+//            'payment_number' => PaymentNumberGenerator::generate(),
         ];
+    }
+
+    public function modelName(): string
+    {
+        return Payment::class;
     }
 }

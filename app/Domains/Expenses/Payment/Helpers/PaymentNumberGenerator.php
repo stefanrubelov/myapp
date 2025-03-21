@@ -10,12 +10,12 @@ use Carbon\Carbon;
 class PaymentNumberGenerator
 {
     /**
-     * Generate a unique payment number in the format YYMM0000
+     * Generate a unique payment number in the format YYYYMMDD00000
      */
     public static function generate(): string
     {
         $date = Carbon::now();
-        $prefix = $date->format('ym');
+        $prefix = $date->format('Ymd');
 
         $latestPayment = Payment::where('payment_number', 'like', $prefix.'%')
             ->orderBy('payment_number', 'desc')
@@ -25,8 +25,14 @@ class PaymentNumberGenerator
             return $prefix.'00000';
         }
 
-        $currentNumber = (int) substr($latestPayment->payment_number, -4);
-        $nextNumber = str_pad((string) $currentNumber, 4, '0', STR_PAD_LEFT);
+        $lastPart = substr($latestPayment->payment_number, strlen($prefix));
+
+        if (strlen($lastPart) === 5 && (int) $lastPart >= 99990) {
+            return $prefix.'000000';
+        }
+
+        $currentNumber = (int) $lastPart;
+        $nextNumber = str_pad((string) ($currentNumber + 10), strlen($lastPart), '0', STR_PAD_LEFT);
 
         return $prefix.$nextNumber;
     }

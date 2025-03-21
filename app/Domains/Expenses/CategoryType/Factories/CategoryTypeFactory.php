@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\CategoryType\Factories;
 
 use App\Domains\Expenses\CategoryType\Enums\CategoryTypeEnum;
 use App\Domains\Expenses\CategoryType\Models\CategoryType;

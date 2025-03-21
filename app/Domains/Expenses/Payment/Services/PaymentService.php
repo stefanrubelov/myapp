@@ -19,7 +19,7 @@ class PaymentService
         $this->repository = $repository;
     }
 
-    public function getPayments(array $filters, int $perPage = 10): LengthAwarePaginator
+    public function getPayments(array $filters, int|false $perPage = 10): LengthAwarePaginator|Collection
     {
         $filter = new PaymentFilter($filters);
 

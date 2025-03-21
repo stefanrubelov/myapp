@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Expenses\PaymentMethod\Models;
 
+use App\Domains\Expenses\PaymentMethod\Factories\PaymentMethodFactory;
 use App\Traits\EnabledScope;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,11 @@ use Spatie\Sluggable\SlugOptions;
 class PaymentMethod extends Model
 {
     use EnabledScope, HasSlug;
+
+    public static function newFactory(): PaymentMethodFactory
+    {
+        return PaymentMethodFactory::new();
+    }
 
     protected function name(): Attribute
     {

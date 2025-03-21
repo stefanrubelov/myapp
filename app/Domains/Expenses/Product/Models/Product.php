@@ -6,6 +6,7 @@ namespace App\Domains\Expenses\Product\Models;
 
 use App\Domains\Expenses\Category\Models\Category;
 use App\Domains\Expenses\Payment\Model\Payment;
+use App\Domains\Expenses\Product\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,11 @@ use Spatie\Sluggable\SlugOptions;
 class Product extends Model
 {
     use HasFactory, HasSlug;
+
+    public static function newFactory(): ProductFactory
+    {
+        return ProductFactory::new();
+    }
 
     protected $fillable = [
         'name',

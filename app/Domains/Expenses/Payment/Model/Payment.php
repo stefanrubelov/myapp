@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains\Expenses\Payment\Model;
 
 use App\Domains\Expenses\Merchant\Models\Merchant;
+use App\Domains\Expenses\Payment\Factories\PaymentFactory;
 use App\Domains\Expenses\PaymentMethod\Models\PaymentMethod;
 use App\Domains\Expenses\Product\Models\Product;
 use App\Domains\Expenses\TransactionType\Enums\TransactionTypeEnum;
@@ -37,6 +38,11 @@ class Payment extends Pivot
         'discounted',
         'payment_number',
     ];
+
+    public static function newFactory(): PaymentFactory
+    {
+        return PaymentFactory::new();
+    }
 
     protected function discounted(): Attribute
     {
@@ -88,10 +94,6 @@ class Payment extends Pivot
         return $this->belongsTo(PaymentMethod::class);
     }
 
-    /**
-     * @param Builder $query
-     * @return Builder
-     */
     public function scopeOutgoing(Builder $query): Builder
     {
         return $query->whereRelation('transactionType', 'slug', TransactionTypeEnum::OUTGOING->value);

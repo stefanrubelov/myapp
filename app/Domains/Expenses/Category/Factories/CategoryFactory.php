@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\Category\Factories;
 
 use App\Domains\Expenses\Category\Models\Category;
 use App\Domains\Expenses\CategoryType\Models\CategoryType;
@@ -39,5 +39,10 @@ class CategoryFactory extends Factory
         return $this->state([
             'parent_id' => $parentId,
         ]);
+    }
+
+    public function modelName(): string
+    {
+        return Category::class;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Expenses\Category\Models;
 
+use App\Domains\Expenses\Category\Factories\CategoryFactory;
 use App\Domains\Expenses\Product\Models\Product;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,11 @@ use Spatie\Sluggable\SlugOptions;
 class Category extends Model
 {
     use HasFactory, HasSlug;
+
+    public static function newFactory(): CategoryFactory
+    {
+        return CategoryFactory::new();
+    }
 
     protected function name(): Attribute
     {

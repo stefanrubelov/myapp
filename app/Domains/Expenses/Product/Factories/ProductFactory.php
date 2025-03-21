@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\Product\Factories;
 
 use App\Domains\Expenses\Product\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,5 +22,10 @@ class ProductFactory extends Factory
         return [
             //
         ];
+    }
+
+    public function modelName(): string
+    {
+        return Product::class;
     }
 }

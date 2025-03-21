@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace App\Domains\Expenses\PaymentMethod\Factories;
 
 use App\Domains\Expenses\PaymentMethod\Enums\PaymentMethodEnum;
 use App\Domains\Expenses\PaymentMethod\Models\PaymentMethod;
@@ -24,5 +24,10 @@ class PaymentMethodFactory extends Factory
             'name' => $this->faker->randomElement(PaymentMethodEnum::values()),
             'is_enabled' => $this->faker->boolean(),
         ];
+    }
+
+    public function modelName(): string
+    {
+        return PaymentMethod::class;
     }
 }

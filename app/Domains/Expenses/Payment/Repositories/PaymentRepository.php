@@ -13,13 +13,17 @@ class PaymentRepository
 {
     public function __construct(private $model = new Payment) {}
 
-    public function all(PaymentFilter $filter, int $perPage): LengthAwarePaginator
+    public function all(PaymentFilter $filter, int|bool $perPage): LengthAwarePaginator|Collection
     {
         $query = $this->model->with(['product', 'merchant', 'transactionType', 'paymentMethod']);
 
         $filter->apply($query);
 
-        return $query->paginate($perPage);
+        if ($perPage) {
+            return $query->paginate($perPage);
+        }
+
+        return $query->get();
     }
 
     public function allOutgoingByProduct(int $productId): Collection|Payment|array
