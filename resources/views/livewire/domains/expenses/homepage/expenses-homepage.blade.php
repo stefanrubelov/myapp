@@ -1,153 +1,69 @@
 <div>
-    <livewire:domains.expenses.homepage.monthly-spending-chart />
-{{--    <article class="rounded-lg border border-gray-100 bg-white p-6">--}}
-{{--        <div class="flex items-center justify-between">--}}
-{{--            <div>--}}
-{{--                <p class="text-sm text-gray-500">Profit</p>--}}
+    <livewire:domains.expenses.homepage.monthly-spending-chart/>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+        <article class="rounded-lg border border-gray-100 bg-white p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Total spent</p>
 
-{{--                <p class="text-2xl font-medium text-gray-900">$240.94</p>--}}
-{{--            </div>--}}
+                    <p class="text-2xl font-medium text-gray-900">{{$data['current_month']}} kr.</p>
+                </div>
+            </div>
+            <div class="mt-1 flex gap-1 text-gray-900">
+                <p class="flex gap-2 text-xs">
+                    <span class="font-medium">{{ Carbon\Carbon::now()->format('F, Y') }}</span>
+                </p>
+            </div>
+        </article>
+        <article class="rounded-lg border border-gray-100 bg-white p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Last month</p>
 
-{{--            <span class="rounded-full bg-blue-100 p-3 text-blue-600">--}}
-{{--      <svg--}}
-{{--          xmlns="http://www.w3.org/2000/svg"--}}
-{{--          class="size-8"--}}
-{{--          fill="none"--}}
-{{--          viewBox="0 0 24 24"--}}
-{{--          stroke="currentColor"--}}
-{{--          stroke-width="2"--}}
-{{--      >--}}
-{{--        <path--}}
-{{--            stroke-linecap="round"--}}
-{{--            stroke-linejoin="round"--}}
-{{--            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"--}}
-{{--        />--}}
-{{--      </svg>--}}
-{{--    </span>--}}
-{{--        </div>--}}
-
-{{--        <div class="mt-1 flex gap-1 text-green-600">--}}
-{{--            <svg--}}
-{{--                xmlns="http://www.w3.org/2000/svg"--}}
-{{--                class="size-4"--}}
-{{--                fill="none"--}}
-{{--                viewBox="0 0 24 24"--}}
-{{--                stroke="currentColor"--}}
-{{--            >--}}
-{{--                <path--}}
-{{--                    stroke-linecap="round"--}}
-{{--                    stroke-linejoin="round"--}}
-{{--                    stroke-width="2"--}}
-{{--                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"--}}
-{{--                />--}}
-{{--            </svg>--}}
-
-{{--            <p class="flex gap-2 text-xs">--}}
-{{--                <span class="font-medium"> 67.81% </span>--}}
-
-{{--                <span class="text-gray-500"> Since last week </span>--}}
-{{--            </p>--}}
-{{--        </div>--}}
-{{--    </article>--}}
-
-    <article class="rounded-lg border border-gray-100 bg-white p-6">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-sm text-gray-500">Profit</p>
-
-                <p class="text-2xl font-medium text-gray-900">$240.94</p>
+                    <p class="text-2xl font-medium text-gray-900">{{$data['last_month']}} kr.</p>
+                </div>
             </div>
 
-            <span class="rounded-full bg-blue-100 p-3 text-blue-600">
-      <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-      >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
-    </span>
-        </div>
+            @if($data['current_month'] < $data['last_month'])
+                <div class="mt-1 flex gap-1 text-green-600">
+                    <x-heroicon-o-arrow-down class="size-4"/>
+                    <p class="flex gap-2 text-xs">
+                        <span class="font-medium"> {{ number_format($data['last_month'] / $data['current_month'] * 100, 2) }}%</span>
+                    </p>
+                </div>
+            @else
+                <div class="mt-1 flex gap-1 text-red-600">
+                    <x-heroicon-o-arrow-up class="size-4"/>
+                    <p class="flex gap-2 text-xs">
+                        <span class="font-medium"> {{ number_format($data['current_month'] / $data['last_month'] * 100, 2) }}%</span>
+                    </p>
+                </div>
+            @endif
+        </article>
+        <article class="rounded-lg border border-gray-100 bg-white p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-500">Same month last year</p>
 
-        <div class="mt-1 flex gap-1 text-red-600">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="size-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
-                />
-            </svg>
+                    <p class="text-2xl font-medium text-gray-900">{{$data['current_month_last_year']}} kr.</p>
+                </div>
+            </div>
 
-            <p class="flex gap-2 text-xs">
-                <span class="font-medium"> 67.81% </span>
-
-                <span class="text-gray-500"> Since last week </span>
-            </p>
-        </div>
-    </article>
-    <article class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
-  <span class="rounded-full bg-blue-100 p-3 text-blue-600">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="size-8"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-      <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-      />
-    </svg>
-  </span>
-
-        <div>
-            <p class="text-2xl font-medium text-gray-900">$240.94</p>
-
-            <p class="text-sm text-gray-500">Total Sales</p>
-        </div>
-    </article>
-
-    <article
-        class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6 sm:justify-between"
-    >
-  <span class="rounded-full bg-blue-100 p-3 text-blue-600 sm:order-last">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="size-8"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-    >
-      <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-      />
-    </svg>
-  </span>
-
-        <div>
-            <p class="text-2xl font-medium text-gray-900">$240.94</p>
-
-            <p class="text-sm text-gray-500">Total Sales</p>
-        </div>
-    </article>
+            @if($data['current_month'] < $data['current_month_last_year'])
+                <div class="mt-1 flex gap-1 text-green-600">
+                    <x-heroicon-o-arrow-down class="size-4"/>
+                    <p class="flex gap-2 text-xs">
+                        <span class="font-medium"> {{ number_format($data['current_month_last_year'] / $data['current_month'] * 100, 2) }}%</span>
+                    </p>
+                </div>
+            @else
+                <div class="mt-1 flex gap-1 text-red-600">
+                    <x-heroicon-o-arrow-up class="size-4"/>
+                    <p class="flex gap-2 text-xs">
+                        <span class="font-medium"> {{ number_format($data['current_month'] / $data['current_month_last_year'] * 100, 2) }}%</span>
+                    </p>
+                </div>
+            @endif
+        </article>
+    </div>
 </div>

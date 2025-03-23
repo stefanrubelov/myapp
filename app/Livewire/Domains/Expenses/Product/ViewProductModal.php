@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Livewire\Domains\Expenses\Product;
 
-use App\Domains\Expenses\Product\Models\Product;
 use App\Domains\Expenses\Product\Infolists\ProductInfoList;
+use App\Domains\Expenses\Product\Models\Product;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Infolists\Concerns\InteractsWithInfolists;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domains\Expenses\PaymentMethod\Enums;
 
-use App\Traits\EnumHelper;
+use App\Domains\Shared\Traits\EnumHelper;
 
 enum PaymentMethodEnum: string
 {

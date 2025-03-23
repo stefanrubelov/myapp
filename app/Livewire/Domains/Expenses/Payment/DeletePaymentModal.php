@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Livewire\Domains\Expenses\Payment;
 
-use App\Domains\Expenses\Payment\Model\Payment;
 use App\Domains\Expenses\Payment\Services\PaymentService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\Factory;

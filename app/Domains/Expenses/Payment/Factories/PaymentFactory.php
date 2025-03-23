@@ -41,7 +41,7 @@ class PaymentFactory extends Factory
             'user_id' => $user->id,
             'discounted' => $this->faker->boolean(),
             'payment_date' => $this->faker->date(),
-//            'payment_number' => PaymentNumberGenerator::generate(),
+            //            'payment_number' => PaymentNumberGenerator::generate(),
         ];
     }
 

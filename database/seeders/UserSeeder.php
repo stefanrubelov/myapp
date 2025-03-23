@@ -18,7 +18,6 @@ class UserSeeder extends Seeder
             'name' => 'Stefan Rubelov',
             'email' => 'stefanrubelov@gmail.com',
             'password' => bcrypt('asdQWE123!'),
-
         ]);
     }
 }

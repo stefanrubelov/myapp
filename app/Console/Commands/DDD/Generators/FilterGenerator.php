@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands\DDD\Generators;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class FilterGenerator extends BaseGenerator{
+class FilterGenerator extends BaseGenerator
+{
     /**
      * @throws FileNotFoundException
      */

@@ -18,6 +18,7 @@ abstract class BaseGenerator
     protected string $entityName;
 
     protected string $domainName;
+
     protected string $className;
 
     public function __construct(string $basePath, string $entityName)
@@ -67,13 +68,13 @@ abstract class BaseGenerator
     {
         $domainPath = "$this->basePath/$this->domainName";
 
-        if (!$this->filesystem->exists($domainPath)) {
+        if (! $this->filesystem->exists($domainPath)) {
             $this->filesystem->makeDirectory($domainPath, 0755, true);
         }
 
         $modulePath = "$domainPath/$moduleType";
 
-        if (!$this->filesystem->exists($modulePath)) {
+        if (! $this->filesystem->exists($modulePath)) {
             $this->filesystem->makeDirectory($modulePath, 0755, true);
         }
 
@@ -82,6 +83,7 @@ abstract class BaseGenerator
 
     /**
      * Creates a file from a stub, ensuring all directories exist
+     *
      * @throws FileNotFoundException
      */
     protected function createFileFromStub(string $targetPath, string $stubPath, array $replacements, bool $checkExists = true): void
@@ -94,7 +96,7 @@ abstract class BaseGenerator
             throw new RuntimeException("File already exists: $filePath");
         }
 
-        if (!$this->filesystem->exists($stubPath)) {
+        if (! $this->filesystem->exists($stubPath)) {
             throw new FileNotFoundException("Stub file not found: $stubPath");
         }
 
